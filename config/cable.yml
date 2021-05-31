@@ -1,0 +1,13 @@
+development:
+  adapter: async
+
+test:
+  adapter: test
+
+production:
+  adapter: async # 追記
+  # HerokuでもAWSでも必要な設定をしています。ActionCableは、サーバーから送信された情報をクライアントへ提供する仕組みがあって成り立っています。その仕組みと連携するためのものをadapterと言います。使用できるadapterの種類には、以下表の3通りがあります。今回は、無料で個人利用に適しているAsyncアダプタを使用します。
+
+  # adapter: redis これは削除する
+  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  channel_prefix: mini_talk_app_production
